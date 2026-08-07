@@ -437,26 +437,74 @@ export function Faq() {
 }
 
 export function CallToAction() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
-    <section className="section-shell py-24">
-      <div className="bg-gradient-brand relative overflow-hidden rounded-[2rem] px-8 py-16 text-center shadow-float">
-        <h2 className="mx-auto max-w-2xl text-3xl font-extrabold text-primary-foreground md:text-5xl">
-          {t.cta.title}
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-lg text-primary-foreground/85">{t.cta.text}</p>
-        <div className="mt-9 flex flex-wrap justify-center gap-3">
-          <Button asChild size="xl" className="bg-card text-foreground hover:bg-card/90">
-            <Link to="/contact">{t.cta.primary}</Link>
-          </Button>
-          <Button
-            asChild
-            size="xl"
-            variant="outline"
-            className="border-primary-foreground/40 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
-          >
-            <Link to="/pricing">{t.cta.secondary}</Link>
-          </Button>
+    <section className="section-shell py-20 md:py-28">
+      {/* Dark Navy Blue Gradient CTA Card matching screenshot */}
+      <div className="relative overflow-hidden rounded-[2.5rem] p-0 shadow-2xl shadow-blue-800/30">
+        {/* Background gradient matching screenshot: dark navy left → dark blue right */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0d1f40] to-[#0e2050] rounded-[2.5rem]" />
+        {/* Glow orbs matching screenshot */}
+        <div className="pointer-events-none absolute -top-20 left-1/3 h-72 w-72 rounded-full bg-blue-500/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-20 right-1/4 h-60 w-60 rounded-full bg-cyan-500/15 blur-3xl" />
+
+        <div className="relative z-10 grid items-center gap-0 md:grid-cols-2">
+          {/* Left: Text content matching screenshot */}
+          <div className="px-10 py-14 md:px-14 md:py-16 space-y-7">
+            {/* Headline - "Klaar voor een website die wél presteert?" with cyan accent on "wél" */}
+            <h2 className="text-3xl md:text-4xl lg:text-[2.6rem] font-black text-white leading-[1.15]">
+              {lang === "nl" ? (
+                <>
+                  Klaar voor een website die{" "}
+                  <span className="text-cyan-400">wél</span> presteert?
+                </>
+              ) : (
+                <>
+                  Ready for a website that actually{" "}
+                  <span className="text-cyan-400">performs?</span>
+                </>
+              )}
+            </h2>
+
+            {/* Subtitle text matching screenshot */}
+            <p className="text-base md:text-lg text-blue-200/80 leading-relaxed max-w-sm">
+              {t.cta.text}
+            </p>
+
+            {/* Two CTA Buttons matching screenshot */}
+            <div className="flex flex-wrap gap-4 pt-2">
+              {/* Primary: White pill button "Neem contact op →" */}
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-blue-900 shadow-lg hover:bg-blue-50 transition-all hover:shadow-blue-400/30 hover:shadow-xl"
+              >
+                <span className="text-blue-500">💬</span>
+                {t.cta.primary}
+                <ArrowRight className="h-4 w-4 text-blue-600" />
+              </Link>
+
+              {/* Secondary: Dark outline pill "Bekijk tarieven →" */}
+              <Link
+                to="/pricing"
+                className="inline-flex items-center gap-2 rounded-full border border-blue-400/40 bg-blue-600/20 px-7 py-3.5 text-sm font-bold text-white backdrop-blur-sm hover:bg-blue-600/30 hover:border-blue-300/60 transition-all"
+              >
+                <span className="text-blue-300">📊</span>
+                {t.cta.secondary}
+                <ArrowRight className="h-4 w-4 text-blue-300" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Right: 3D Artwork of website mockup on pedestal with floating cubes and spheres */}
+          <div className="relative flex items-center justify-center px-6 pb-8 md:pb-0 md:min-h-[360px]">
+            {/* Neon glow circle behind artwork */}
+            <div className="absolute inset-x-0 bottom-0 mx-auto h-36 w-3/4 rounded-full bg-blue-500/25 blur-2xl pointer-events-none" />
+            <img
+              src="/cta-3d-artwork.png"
+              alt="SLUISWEB 3D Website Mockup"
+              className="relative w-full max-w-[380px] object-contain filter drop-shadow-[0_20px_40px_rgba(37,99,235,0.35)] animate-float"
+            />
+          </div>
         </div>
       </div>
     </section>
