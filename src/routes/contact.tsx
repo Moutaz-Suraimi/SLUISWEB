@@ -7,22 +7,48 @@ import { useI18n } from "@/lib/i18n";
 import { toast } from "sonner";
 import { Contact3DScene } from "@/components/contact/Contact3DScene";
 
-const title = "Contact — Plan een gesprek | SLUISWEB";
+const title = "Contact | Website laten maken | SluisWeb";
 const description =
-  "Neem contact op met SLUISWEB voor een vrijblijvend gesprek over uw website, webshop of webapplicatie. Reactie binnen 24 uur.";
+  "Klaar voor een website die wél presteert? Neem contact op met SluisWeb in Heemskerk. Vrijblijvend adviesgesprek en offerte.";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title },
       { name: "description", content: description },
+      { name: "robots", content: "index, follow" },
+      { property: "og:type", content: "website" },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "/contact" },
+      { property: "og:url", content: "https://sluisweb.nl/contact" },
+      { property: "og:image", content: "https://sluisweb.nl/hero-3d-artwork.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: "https://sluisweb.nl/contact" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          "@id": "https://sluisweb.nl/contact#webpage",
+          url: "https://sluisweb.nl/contact",
+          name: title,
+          description,
+          breadcrumb: {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://sluisweb.nl/" },
+              { "@type": "ListItem", position: 2, name: "Contact", item: "https://sluisweb.nl/contact" },
+            ],
+          },
+          mainEntity: { "@id": "https://sluisweb.nl/#organization" },
+          inLanguage: "nl-NL",
+        }),
+      },
+    ],
   }),
   component: ContactPage,
 });

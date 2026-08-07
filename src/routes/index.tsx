@@ -13,34 +13,44 @@ import {
   WhyUs,
 } from "@/components/home/HomeSections";
 
-const title = "SLUISWEB — Premium webdevelopment uit Nederland";
+const title = "Website laten maken in Nederland | SluisWeb";
 const description =
-  "SLUISWEB bouwt premium websites, webshops en webapplicaties voor Nederlandse ondernemers. Vaste prijs, razendsnelle performance en meetbaar resultaat.";
+  "SluisWeb – professioneel webbureau uit Heemskerk. Website laten maken, webshop laten bouwen en webapplicaties op maat voor Nederlandse ondernemers. Snel, veilig en meetbaar.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title },
       { name: "description", content: description },
+      { name: "robots", content: "index, follow" },
+      { property: "og:type", content: "website" },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://sluisweb.nl/" },
+      { property: "og:image", content: "https://sluisweb.nl/hero-3d-artwork.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://sluisweb.nl/" }],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "ProfessionalService",
-          name: "SLUISWEB",
+          "@type": "WebPage",
+          "@id": "https://sluisweb.nl/#webpage",
+          url: "https://sluisweb.nl/",
+          name: title,
           description,
-          areaServed: "NL",
-          address: { "@type": "PostalAddress", addressLocality: "Amsterdam", addressCountry: "NL" },
-          email: "info@sluisweb.nl",
-          telephone: "+31201234567",
+          isPartOf: { "@id": "https://sluisweb.nl/#website" },
+          about: { "@id": "https://sluisweb.nl/#organization" },
+          breadcrumb: {
+            "@type": "BreadcrumbList",
+            itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://sluisweb.nl/" }],
+          },
+          primaryImageOfPage: { "@type": "ImageObject", url: "https://sluisweb.nl/hero-3d-artwork.png" },
+          inLanguage: "nl-NL",
         }),
       },
     ],

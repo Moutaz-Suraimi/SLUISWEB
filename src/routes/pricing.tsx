@@ -6,22 +6,47 @@ import { Faq } from "@/components/home/HomeSections";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 
-const title = "Tarieven — Vaste prijzen voor websites | SLUISWEB";
+const title = "Website Kosten & Tarieven | SluisWeb";
 const description =
-  "Transparante tarieven voor websites, webshops en maatwerk. Vaste prijs vooraf, inclusief hosting-setup, SSL en support.";
+  "Transparante en heldere tarieven voor professionele websites, webshops en maatwerk webapplicaties. Vaste prijs vooraf, direct online rendement.";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
       { title },
       { name: "description", content: description },
+      { name: "robots", content: "index, follow" },
+      { property: "og:type", content: "website" },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "/pricing" },
+      { property: "og:url", content: "https://sluisweb.nl/pricing" },
+      { property: "og:image", content: "https://sluisweb.nl/hero-3d-artwork.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
     ],
-    links: [{ rel: "canonical", href: "/pricing" }],
+    links: [{ rel: "canonical", href: "https://sluisweb.nl/pricing" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "@id": "https://sluisweb.nl/pricing#webpage",
+          url: "https://sluisweb.nl/pricing",
+          name: title,
+          description,
+          breadcrumb: {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://sluisweb.nl/" },
+              { "@type": "ListItem", position: 2, name: "Tarieven", item: "https://sluisweb.nl/pricing" },
+            ],
+          },
+          inLanguage: "nl-NL",
+        }),
+      },
+    ],
   }),
   component: PricingPage,
 });

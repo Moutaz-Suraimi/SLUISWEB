@@ -6,22 +6,47 @@ import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 import { CallToAction } from "@/components/home/HomeSections";
 
-const title = "Portfolio — Recent Opgeleverde Projecten | SLUISWEB";
+const title = "Portfolio | Websites & Webshops | SluisWeb";
 const description =
-  "Bekijk ons portfolio met maatwerk websites, webshops en webapplicaties voor Nederlandse bedrijven. Hoge conversie en snelde laadtijden.";
+  "Bekijk ons portfolio met maatwerk websites, webshops en webapplicaties voor Nederlandse bedrijven. Hoog converterend en razendsnel.";
 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
     meta: [
       { title },
       { name: "description", content: description },
+      { name: "robots", content: "index, follow" },
+      { property: "og:type", content: "website" },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "/portfolio" },
+      { property: "og:url", content: "https://sluisweb.nl/portfolio" },
+      { property: "og:image", content: "https://sluisweb.nl/hero-3d-artwork.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
     ],
-    links: [{ rel: "canonical", href: "/portfolio" }],
+    links: [{ rel: "canonical", href: "https://sluisweb.nl/portfolio" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "@id": "https://sluisweb.nl/portfolio#webpage",
+          url: "https://sluisweb.nl/portfolio",
+          name: title,
+          description,
+          breadcrumb: {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://sluisweb.nl/" },
+              { "@type": "ListItem", position: 2, name: "Portfolio", item: "https://sluisweb.nl/portfolio" },
+            ],
+          },
+          inLanguage: "nl-NL",
+        }),
+      },
+    ],
   }),
   component: PortfolioPage,
 });

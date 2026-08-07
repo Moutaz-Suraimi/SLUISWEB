@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Home -->
+  <url>
+    <loc>https://sluisweb.nl/</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://sluisweb.nl/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sluisweb.nl/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sluisweb.nl/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
+  <!-- Diensten (Services) -->
+  <url>
+    <loc>https://sluisweb.nl/services</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://sluisweb.nl/services"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sluisweb.nl/en/services"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
+  <!-- Portfolio -->
+  <url>
+    <loc>https://sluisweb.nl/portfolio</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
+  <!-- Tarieven (Pricing) -->
+  <url>
+    <loc>https://sluisweb.nl/pricing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://sluisweb.nl/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://sluisweb.nl/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://sluisweb.nl/terms</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <lastmod>2026-08-07</lastmod>
+  </url>
+
+</urlset>

@@ -6,22 +6,57 @@ import { Services3DGrid } from "@/components/home/Services3DGrid";
 import { useI18n } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 
-const title = "Diensten — Webdesign, webshops & SEO | SLUISWEB";
+const title = "Webdesign & Webdevelopment Diensten | SluisWeb";
 const description =
-  "Website development, webshops, maatwerk applicaties, UI/UX design, SEO, hosting en onderhoud. Bekijk alle diensten van SLUISWEB.";
+  "Professionele webdesign, webshop development, webapplicaties, SEO en hosting voor Nederlandse bedrijven. Maatwerk digitale oplossingen door SluisWeb uit Heemskerk.";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
       { title },
       { name: "description", content: description },
+      { name: "robots", content: "index, follow" },
+      { property: "og:type", content: "website" },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "/services" },
+      { property: "og:url", content: "https://sluisweb.nl/services" },
+      { property: "og:image", content: "https://sluisweb.nl/hero-3d-artwork.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
     ],
-    links: [{ rel: "canonical", href: "/services" }],
+    links: [{ rel: "canonical", href: "https://sluisweb.nl/services" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "@id": "https://sluisweb.nl/services#webpage",
+          url: "https://sluisweb.nl/services",
+          name: title,
+          description,
+          breadcrumb: {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://sluisweb.nl/" },
+              { "@type": "ListItem", position: 2, name: "Diensten", item: "https://sluisweb.nl/services" },
+            ],
+          },
+          mainEntity: {
+            "@type": "ItemList",
+            name: "Webdevelopment Diensten SluisWeb",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Website laten maken", url: "https://sluisweb.nl/services" },
+              { "@type": "ListItem", position: 2, name: "Webshop laten maken", url: "https://sluisweb.nl/services" },
+              { "@type": "ListItem", position: 3, name: "Webapplicatie laten maken", url: "https://sluisweb.nl/services" },
+              { "@type": "ListItem", position: 4, name: "SEO bureau", url: "https://sluisweb.nl/services" },
+            ],
+          },
+          inLanguage: "nl-NL",
+        }),
+      },
+    ],
   }),
   component: ServicesPage,
 });
