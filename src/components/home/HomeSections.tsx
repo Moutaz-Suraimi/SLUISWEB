@@ -210,17 +210,22 @@ const whyIcons = [BadgeCheck, Users, Gauge, LineChart];
 export function WhyUs() {
   const { t } = useI18n();
   return (
-    <section className="border-y border-border bg-gradient-soft py-24">
+    <section className="relative border-y border-border/60 bg-gradient-to-b from-slate-950/5 via-slate-900/10 to-slate-950/5 py-24">
       <div className="section-shell">
         <SectionHead eyebrow={t.why.eyebrow} title={t.why.title} />
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {t.why.items.map((item, i) => {
             const Icon = whyIcons[i % whyIcons.length]!;
             return (
-              <div key={item.title} className="glass-panel rounded-3xl p-7">
-                <Icon className="h-7 w-7 text-primary" />
-                <h3 className="mt-5 text-lg font-bold">{item.title}</h3>
-                <p className="mt-2 text-base text-muted-foreground">{item.text}</p>
+              <div
+                key={item.title}
+                className="group relative overflow-hidden rounded-[28px] border border-border/80 bg-card/90 dark:bg-slate-900/90 backdrop-blur-xl p-7 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/15"
+              >
+                <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-md shadow-blue-500/25 group-hover:scale-110 transition-transform">
+                  <Icon className="h-7 w-7" />
+                </div>
+                <h3 className="mt-5 text-lg font-extrabold tracking-tight text-foreground">{item.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{item.text}</p>
               </div>
             );
           })}
@@ -233,14 +238,27 @@ export function WhyUs() {
 export function Process() {
   const { t } = useI18n();
   return (
-    <section className="section-shell py-24">
+    <section className="relative section-shell py-24">
       <SectionHead eyebrow={t.process.eyebrow} title={t.process.title} />
       <ol className="mt-14 grid gap-6 md:grid-cols-4">
         {t.process.steps.map((step, i) => (
-          <li key={step.title} className="relative rounded-3xl border border-border bg-card p-7 shadow-soft">
-            <span className="text-gradient text-5xl font-extrabold">0{i + 1}</span>
-            <h3 className="mt-4 text-lg font-bold">{step.title}</h3>
-            <p className="mt-2 text-base text-muted-foreground">{step.text}</p>
+          <li
+            key={step.title}
+            className="group relative overflow-hidden rounded-[32px] border border-border/80 bg-card/90 dark:bg-slate-900/90 backdrop-blur-xl p-7 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/20 flex flex-col justify-between"
+          >
+            <div>
+              {/* 3D Metallic Number Badge */}
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-b from-slate-100 to-slate-300 dark:from-slate-800 dark:to-slate-900 border border-white/40 dark:border-white/10 text-xl font-black text-primary shadow-inner">
+                0{i + 1}
+              </div>
+              <h3 className="mt-5 text-xl font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{step.text}</p>
+            </div>
+
+            {/* Bottom Glow Line */}
+            <div className="mt-6 h-1 w-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 opacity-30 group-hover:opacity-100 transition-opacity" />
           </li>
         ))}
       </ol>

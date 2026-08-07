@@ -70,45 +70,45 @@ function PortfolioPage() {
           {filteredItems.map((item) => (
             <article
               key={item.id}
-              className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-float"
+              className="group relative flex flex-col overflow-hidden rounded-[32px] border border-border/80 bg-card/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/20"
             >
               {/* Visual Card Header / Mockup Banner */}
-              <div className="relative h-64 w-full overflow-hidden bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 p-6 flex flex-col justify-between">
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/10 backdrop-blur-md px-3.5 py-1 text-xs font-semibold text-white">
+              <div className="relative h-64 w-full overflow-hidden bg-gradient-to-br from-slate-950 via-indigo-950 to-blue-950 p-6 flex flex-col justify-between">
+                <div className="flex items-center justify-between relative z-10">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-4 py-1.5 text-xs font-bold text-white shadow-sm">
                     <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
                     {item.categoryLabel}
                   </span>
-                  <span className="rounded-full bg-emerald-500/20 border border-emerald-500/30 px-3 py-1 text-xs font-bold text-emerald-300">
+                  <span className="rounded-full bg-emerald-500/20 border border-emerald-400/40 px-3.5 py-1 text-xs font-black text-emerald-300 backdrop-blur-md shadow-sm">
                     {item.stats}
                   </span>
                 </div>
 
                 {/* 3D Stylized Graphic Placeholder */}
                 <div className="relative flex items-center justify-center my-auto">
-                  <div className="h-28 w-44 rounded-2xl border border-white/20 bg-white/5 backdrop-blur-lg p-4 shadow-2xl transition-transform duration-500 group-hover:scale-105 group-hover:rotate-1 flex flex-col justify-between">
+                  <div className="h-32 w-52 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl p-4 shadow-2xl transition-transform duration-500 group-hover:scale-105 group-hover:rotate-1 flex flex-col justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
-                      <div className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
-                      <div className="h-2.5 w-2.5 rounded-full bg-green-400/80" />
-                      <div className="ml-auto h-2 w-16 rounded bg-white/20" />
+                      <div className="h-2.5 w-2.5 rounded-full bg-red-400" />
+                      <div className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
+                      <div className="h-2.5 w-2.5 rounded-full bg-green-400" />
+                      <div className="ml-auto h-2 w-20 rounded bg-white/20" />
                     </div>
-                    <div className="space-y-1.5">
-                      <div className="h-2 w-3/4 rounded bg-blue-400/60" />
-                      <div className="h-2 w-1/2 rounded bg-cyan-300/40" />
+                    <div className="space-y-2">
+                      <div className="h-2.5 w-3/4 rounded bg-gradient-to-r from-blue-400 to-cyan-300" />
+                      <div className="h-2 w-1/2 rounded bg-cyan-300/50" />
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs text-white/70">
+                <div className="flex items-center justify-between text-xs text-white/70 relative z-10">
                   <span>{lang === "nl" ? "Klant Showcase" : "Client Showcase"}</span>
                   <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-white" />
                 </div>
               </div>
 
               {/* Card Body */}
-              <div className="flex flex-1 flex-col p-7">
-                <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+              <div className="flex flex-1 flex-col p-8">
+                <h3 className="text-2xl font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors">
                   {item.title}
                 </h3>
                 <p className="mt-3 text-base leading-relaxed text-muted-foreground flex-1">
@@ -120,18 +120,18 @@ function PortfolioPage() {
                   {item.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs font-medium text-muted-foreground"
+                      className="rounded-full border border-border/80 bg-secondary/80 px-3.5 py-1 text-xs font-semibold text-muted-foreground"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <div className="mt-7 pt-4 border-t border-border flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                <div className="mt-7 pt-4 border-t border-border/60 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-500">
                     <CheckCircle2 className="h-4 w-4" /> {lang === "nl" ? "Live Operationeel" : "Live Operational"}
                   </span>
-                  <Button asChild variant="soft" size="sm" className="gap-1">
+                  <Button asChild variant="soft" size="sm" className="rounded-full gap-1">
                     <Link to="/contact">
                       {t.portfolio.viewProject} <ArrowUpRight className="h-4 w-4" />
                     </Link>
