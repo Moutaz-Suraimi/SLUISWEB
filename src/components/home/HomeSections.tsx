@@ -60,9 +60,9 @@ export function Hero() {
       <div className="pointer-events-none absolute left-10 bottom-10 h-96 w-96 rounded-full bg-blue-600/15 blur-[120px]" />
 
       <div className="section-shell relative z-10">
-        <div className="grid items-center gap-12 lg:grid-cols-12">
+        <div className="grid items-center gap-8 lg:gap-12 lg:grid-cols-12">
           {/* Left Column: Text & Hero Details */}
-          <div className="lg:col-span-7 text-left space-y-7">
+          <div className="lg:col-span-7 text-left space-y-7 z-10">
             {/* Pill Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary backdrop-blur-md shadow-sm">
               <Sparkles className="h-3.5 w-3.5 text-primary" />
