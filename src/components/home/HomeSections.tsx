@@ -137,44 +137,7 @@ function SectionHead({
   );
 }
 
-const serviceIcons = [Globe, ShoppingCart, ServerCog, Palette, Search, Gauge];
-
-export function Services() {
-  const { t } = useI18n();
-  return (
-    <section className="section-shell py-24">
-      <SectionHead
-        eyebrow={t.services.eyebrow}
-        title={t.services.title}
-        subtitle={t.services.subtitle}
-      />
-      <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {t.services.items.map((item, i) => {
-          const Icon = serviceIcons[i % serviceIcons.length]!;
-          return (
-            <article
-              key={item.title}
-              className="group relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-float"
-            >
-              <div className="bg-gradient-brand inline-flex h-12 w-12 items-center justify-center rounded-2xl text-primary-foreground">
-                <Icon className="h-6 w-6" />
-              </div>
-              <h3 className="mt-6 text-xl font-bold">{item.title}</h3>
-              <p className="mt-3 text-base text-muted-foreground">{item.text}</p>
-            </article>
-          );
-        })}
-      </div>
-      <div className="mt-10 text-center">
-        <Button asChild variant="soft" size="lg">
-          <Link to="/services">
-            {t.hero.secondary} <ArrowRight className="h-4 w-4" />
-          </Link>
-        </Button>
-      </div>
-    </section>
-  );
-}
+export { Services3DGrid as Services } from "./Services3DGrid";
 
 export function PortfolioShowcase() {
   const { t } = useI18n();

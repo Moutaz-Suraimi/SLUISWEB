@@ -12,8 +12,6 @@ export default defineConfig({
     tanstackStart({
       server: {
         entry: "server",
-        // Tell Nitro to output a Vercel-compatible bundle under .vercel/output
-        preset: "vercel",
       },
     }),
     viteReact(),
