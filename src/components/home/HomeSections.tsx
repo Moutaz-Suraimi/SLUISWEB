@@ -15,6 +15,11 @@ import {
   Sparkles,
   Star,
   Users,
+  Play,
+  Rocket,
+  Smile,
+  Zap,
+  Trophy,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -42,37 +47,105 @@ function useInView<T extends HTMLElement>() {
 }
 
 export function Hero() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
-    <section className="relative overflow-hidden bg-gradient-soft">
+    <section className="relative overflow-hidden bg-gradient-to-b from-background via-slate-900/5 to-background dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 pt-10 pb-20 md:pb-28">
+      {/* Background Aurora / Ambient Glows */}
       <div
         aria-hidden
-        className="animate-aurora pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[56rem] -translate-x-1/2 rounded-full opacity-30 blur-3xl"
+        className="pointer-events-none absolute -top-40 left-1/2 h-[40rem] w-[60rem] -translate-x-1/2 rounded-full opacity-25 blur-3xl"
         style={{ backgroundImage: "var(--gradient-brand)" }}
       />
-      <ThreeScene />
-      <div className="section-shell relative py-24 text-center md:py-32">
-        <span className="reveal-up inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-muted-foreground shadow-soft">
-          <Sparkles className="h-4 w-4 text-primary" />
-          {t.hero.badge}
-        </span>
-        <h1 className="reveal-up mx-auto mt-7 max-w-4xl text-4xl font-extrabold leading-[1.05] md:text-6xl lg:text-[4rem]">
-          {t.hero.title} <span className="text-gradient">{t.hero.titleAccent}</span>
-        </h1>
-        <p className="reveal-up mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
-          {t.hero.subtitle}
-        </p>
-        <div className="reveal-up mt-9 flex flex-wrap justify-center gap-3">
-          <Button asChild variant="brand" size="xl">
-            <Link to="/contact">
-              {t.hero.primary} <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-          <Button asChild variant="soft" size="xl">
-            <Link to="/services">{t.hero.secondary}</Link>
-          </Button>
+      <div className="pointer-events-none absolute right-10 top-20 h-96 w-96 rounded-full bg-cyan-500/15 blur-[120px]" />
+      <div className="pointer-events-none absolute left-10 bottom-10 h-96 w-96 rounded-full bg-blue-600/15 blur-[120px]" />
+
+      <div className="section-shell relative z-10">
+        <div className="grid items-center gap-12 lg:grid-cols-12">
+          {/* Left Column: Text & Hero Details */}
+          <div className="lg:col-span-7 text-left space-y-7">
+            {/* Pill Badge */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary backdrop-blur-md shadow-sm">
+              <Sparkles className="h-3.5 w-3.5 text-primary" />
+              {t.hero.badge}
+            </div>
+
+            {/* Main Headline */}
+            <h1 className="text-4xl font-black tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08]">
+              {t.hero.title}{" "}
+              <span className="bg-gradient-to-r from-blue-600 via-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(37,99,235,0.4)]">
+                {t.hero.titleAccent}
+              </span>
+            </h1>
+
+            {/* Subtitle Paragraph */}
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+              {t.hero.subtitle}
+            </p>
+
+            {/* Action Buttons Row matching screenshot */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Button
+                asChild
+                size="xl"
+                className="rounded-full px-8 py-6 text-base font-bold shadow-lg shadow-blue-600/30 hover:shadow-xl hover:shadow-blue-600/40 transition-all gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white"
+              >
+                <Link to="/contact">
+                  {t.hero.primary} <ArrowRight className="h-5 w-5" />
+                </Link>
+              </Button>
+
+              <Button
+                asChild
+                variant="outline"
+                size="xl"
+                className="rounded-full px-7 py-6 text-base font-bold border-border/80 bg-card/80 backdrop-blur-md hover:bg-card hover:border-primary/50 transition-all gap-2.5 text-foreground shadow-sm"
+              >
+                <Link to="/services">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/15 text-primary">
+                    <Play className="h-3.5 w-3.5 fill-current ml-0.5" />
+                  </div>
+                  {t.hero.secondary}
+                </Link>
+              </Button>
+            </div>
+
+            {/* Trust Proof / Avatar Row matching screenshot */}
+            <div className="flex items-center gap-4 pt-4 border-t border-border/40">
+              <div className="flex -space-x-3">
+                <img
+                  className="inline-block h-10 w-10 rounded-full ring-2 ring-background object-cover"
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+                  alt="Client Avatar 1"
+                />
+                <img
+                  className="inline-block h-10 w-10 rounded-full ring-2 ring-background object-cover"
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
+                  alt="Client Avatar 2"
+                />
+                <img
+                  className="inline-block h-10 w-10 rounded-full ring-2 ring-background object-cover"
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80"
+                  alt="Client Avatar 3"
+                />
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 font-bold text-xs text-white ring-2 ring-background shadow-md">
+                  +50
+                </div>
+              </div>
+              <p className="text-xs md:text-sm font-semibold text-muted-foreground">
+                {lang === "nl"
+                  ? "Meer dan 180+ ondernemers vertrouwen op SluisWeb"
+                  : "More than 180+ business owners trust SluisWeb"}
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column: 3D Pedestal Centerpiece */}
+          <div className="lg:col-span-5 relative flex items-center justify-center">
+            {/* Glowing Backdrop Circle behind 3D Pedestal */}
+            <div className="absolute h-80 w-80 rounded-full bg-gradient-to-tr from-blue-600/30 to-cyan-400/30 blur-3xl pointer-events-none" />
+            <ThreeScene />
+          </div>
         </div>
-        <p className="mt-6 text-sm text-muted-foreground">{t.hero.note}</p>
       </div>
     </section>
   );
@@ -97,23 +170,34 @@ function Counter({ value }: { value: string }) {
 
   const rendered = Number.isNaN(numeric) ? value : value.replace(String(numeric), String(display));
   return (
-    <span ref={ref} className="text-gradient text-4xl font-extrabold md:text-5xl">
+    <span ref={ref} className="bg-gradient-to-r from-blue-600 to-cyan-400 bg-clip-text text-transparent text-3xl font-black md:text-4xl">
       {rendered}
     </span>
   );
 }
 
+const statIcons = [Rocket, Smile, Zap, Trophy];
+
 export function Stats() {
   const { t } = useI18n();
   return (
-    <section className="section-shell -mt-10 relative z-10">
-      <div className="grid gap-6 rounded-3xl border border-border bg-card p-8 shadow-soft sm:grid-cols-2 lg:grid-cols-4">
-        {t.stats.map((s) => (
-          <div key={s.label} className="text-center">
-            <Counter value={s.value} />
-            <p className="mt-2 text-sm text-muted-foreground">{s.label}</p>
-          </div>
-        ))}
+    <section className="section-shell -mt-12 relative z-20 mb-12">
+      {/* Floating 3D Glossy Pod Card matching screenshot bottom bar */}
+      <div className="rounded-[32px] border border-border/80 bg-card/95 dark:bg-slate-900/95 backdrop-blur-2xl p-6 md:p-8 shadow-2xl shadow-blue-500/10">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-border/60">
+          {t.stats.map((s, i) => {
+            const Icon = statIcons[i % statIcons.length]!;
+            return (
+              <div key={s.label} className="flex flex-col items-center justify-center text-center pt-4 sm:pt-0 first:pt-0 sm:px-4">
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-500/10 text-primary mb-3 shadow-inner">
+                  <Icon className="h-5 w-5 text-primary" />
+                </div>
+                <Counter value={s.value} />
+                <p className="mt-1 text-xs md:text-sm font-semibold text-muted-foreground">{s.label}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

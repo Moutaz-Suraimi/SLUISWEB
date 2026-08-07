@@ -1,79 +1,166 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, PerspectiveCamera, Stars, Sphere, Torus, Ring } from "@react-three/drei";
+import { Float, MeshDistortMaterial, PerspectiveCamera, Stars } from "@react-three/drei";
 import { useRef, useMemo } from "react";
 import * as THREE from "three";
 
-function FloatingCore() {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const ringRef = useRef<THREE.Mesh>(null);
-  const outerRingRef = useRef<THREE.Mesh>(null);
+// 3D Sluisweb Logo Mesh (Stylized S Prism)
+function LogoPrism() {
+  const groupRef = useRef<THREE.Group>(null);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
-    if (meshRef.current) {
-      meshRef.current.rotation.x = t * 0.15;
-      meshRef.current.rotation.y = t * 0.2;
-    }
-    if (ringRef.current) {
-      ringRef.current.rotation.x = t * 0.3;
-      ringRef.current.rotation.y = t * 0.1;
-      ringRef.current.rotation.z = t * 0.2;
-    }
-    if (outerRingRef.current) {
-      outerRingRef.current.rotation.x = -t * 0.2;
-      outerRingRef.current.rotation.y = t * 0.25;
+    if (groupRef.current) {
+      groupRef.current.rotation.y = Math.sin(t * 0.5) * 0.3;
+      groupRef.current.rotation.x = Math.cos(t * 0.4) * 0.15;
     }
   });
 
   return (
-    <group>
-      {/* Central Distorted 3D Crystal Gem */}
-      <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-        <mesh ref={meshRef} scale={1.6}>
-          <icosahedronGeometry args={[1, 1]} />
-          <MeshDistortMaterial
-            color="#2563eb"
-            emissive="#3b82f6"
-            emissiveIntensity={0.8}
+    <group ref={groupRef} scale={1.2}>
+      {/* Upper Polygon Arm */}
+      <mesh position={[-0.2, 0.4, 0]} rotation={[0, 0, -0.4]}>
+        <boxGeometry args={[0.9, 0.35, 0.4]} />
+        <meshStandardMaterial
+          color="#2563eb"
+          emissive="#3b82f6"
+          emissiveIntensity={0.6}
+          roughness={0.15}
+          metalness={0.85}
+        />
+      </mesh>
+      {/* Center Polygon Arm */}
+      <mesh position={[0, 0, 0]} rotation={[0, 0, 0.5]}>
+        <boxGeometry args={[1.1, 0.35, 0.4]} />
+        <meshStandardMaterial
+          color="#0284c7"
+          emissive="#38bdf8"
+          emissiveIntensity={0.7}
+          roughness={0.1}
+          metalness={0.9}
+        />
+      </mesh>
+      {/* Lower Polygon Arm */}
+      <mesh position={[0.2, -0.4, 0]} rotation={[0, 0, -0.4]}>
+        <boxGeometry args={[0.9, 0.35, 0.4]} />
+        <meshStandardMaterial
+          color="#1d4ed8"
+          emissive="#2563eb"
+          emissiveIntensity={0.6}
+          roughness={0.15}
+          metalness={0.85}
+        />
+      </mesh>
+    </group>
+  );
+}
+
+function Hero3DCenterpiece() {
+  const sphereRef = useRef<THREE.Mesh>(null);
+  const orbitRingRef = useRef<THREE.Mesh>(null);
+  const cube1Ref = useRef<THREE.Mesh>(null);
+  const cube2Ref = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+    if (sphereRef.current) {
+      sphereRef.current.rotation.y = t * 0.15;
+      sphereRef.current.rotation.x = t * 0.08;
+    }
+    if (orbitRingRef.current) {
+      orbitRingRef.current.rotation.z = t * 0.25;
+      orbitRingRef.current.rotation.x = 0.5 + Math.sin(t * 0.2) * 0.1;
+    }
+    if (cube1Ref.current) {
+      cube1Ref.current.rotation.x = t * 0.4;
+      cube1Ref.current.rotation.y = t * 0.5;
+    }
+    if (cube2Ref.current) {
+      cube2Ref.current.rotation.x = -t * 0.3;
+      cube2Ref.current.rotation.y = t * 0.35;
+    }
+  });
+
+  return (
+    <group position={[0, -0.2, 0]}>
+      {/* Pedestal Base Ring Stand matching screenshot */}
+      <mesh position={[0, -1.8, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[2.5, 2.7, 0.2, 64]} />
+        <meshStandardMaterial
+          color="#38bdf8"
+          emissive="#38bdf8"
+          emissiveIntensity={0.8}
+          roughness={0.2}
+          metalness={0.8}
+          transparent
+          opacity={0.7}
+        />
+      </mesh>
+      {/* Glowing Inner Pedestal Ring */}
+      <mesh position={[0, -1.75, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[1.8, 2.4, 64]} />
+        <meshBasicMaterial color="#60a5fa" transparent opacity={0.6} side={THREE.DoubleSide} />
+      </mesh>
+
+      {/* Geodesic Wireframe Sphere */}
+      <Float speed={1.5} rotationIntensity={0.4} floatIntensity={0.8}>
+        <mesh ref={sphereRef} scale={2.2}>
+          <icosahedronGeometry args={[1, 2]} />
+          <meshStandardMaterial
+            color="#38bdf8"
+            emissive="#0284c7"
+            emissiveIntensity={0.9}
+            wireframe
             roughness={0.1}
-            metalness={0.9}
-            wireframe={true}
-            transparent={true}
-            opacity={0.85}
-            distort={0.4}
-            speed={2.5}
+            transparent
+            opacity={0.65}
           />
         </mesh>
       </Float>
 
-      {/* Inner Glowing Orbiting Ring */}
-      <Float speed={1.5} rotationIntensity={0.5} floatIntensity={1}>
-        <mesh ref={ringRef} scale={2.4}>
-          <torusGeometry args={[1, 0.03, 16, 100]} />
+      {/* Central 3D Logo Prism */}
+      <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+        <LogoPrism />
+      </Float>
+
+      {/* Neon Orbiting Ring Around Centerpiece */}
+      <Float speed={1.2} rotationIntensity={0.3} floatIntensity={0.6}>
+        <mesh ref={orbitRingRef} position={[0, 0, 0]} rotation={[1.1, 0.4, 0]} scale={2.8}>
+          <torusGeometry args={[1, 0.035, 16, 100]} />
           <meshStandardMaterial
             color="#60a5fa"
             emissive="#93c5fd"
-            emissiveIntensity={1.2}
-            roughness={0.2}
-            metalness={0.8}
-            transparent
-            opacity={0.7}
+            emissiveIntensity={1.4}
+            roughness={0.1}
+            metalness={0.9}
           />
         </mesh>
       </Float>
 
-      {/* Outer Orbit Ring */}
-      <Float speed={1.2} rotationIntensity={0.8} floatIntensity={1.2}>
-        <mesh ref={outerRingRef} scale={3.2}>
-          <torusGeometry args={[1, 0.015, 16, 100]} />
+      {/* Floating 3D Blue Glass Cubes (Screenshot elements) */}
+      <Float speed={2.5} rotationIntensity={1} floatIntensity={1.8}>
+        <mesh ref={cube1Ref} position={[2.6, 1.8, 0.5]} scale={0.55}>
+          <boxGeometry args={[1, 1, 1]} />
+          <MeshDistortMaterial
+            color="#3b82f6"
+            emissive="#2563eb"
+            emissiveIntensity={0.8}
+            roughness={0.1}
+            metalness={0.9}
+            transparent
+            opacity={0.8}
+            distort={0.1}
+          />
+        </mesh>
+      </Float>
+      <Float speed={2.2} rotationIntensity={1.2} floatIntensity={1.5}>
+        <mesh ref={cube2Ref} position={[-2.4, 0.8, -0.5]} scale={0.4}>
+          <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial
             color="#38bdf8"
-            emissive="#38bdf8"
-            emissiveIntensity={1.5}
-            roughness={0.1}
-            wireframe
-            transparent
-            opacity={0.5}
+            emissive="#0284c7"
+            emissiveIntensity={0.9}
+            roughness={0.15}
+            metalness={0.85}
           />
         </mesh>
       </Float>
@@ -81,41 +168,35 @@ function FloatingCore() {
   );
 }
 
-function FloatingParticles({ count = 80 }: { count?: number }) {
+function FloatingParticles({ count = 60 }: { count?: number }) {
   const points = useRef<THREE.Points>(null);
 
-  const [positions, scales] = useMemo(() => {
+  const [positions] = useMemo(() => {
     const pos = new Float32Array(count * 3);
-    const sca = new Float32Array(count);
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 16;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 10;
-      sca[i] = Math.random() * 0.8 + 0.2;
+      pos[i * 3] = (Math.random() - 0.5) * 12;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 8;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 8;
     }
-    return [pos, sca];
+    return [pos];
   }, [count]);
 
   useFrame((state) => {
     if (points.current) {
-      points.current.rotation.y = state.clock.getElapsedTime() * 0.05;
-      points.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.03) * 0.1;
+      points.current.rotation.y = state.clock.getElapsedTime() * 0.04;
     }
   });
 
   return (
     <points ref={points}>
       <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-        />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.08}
+        size={0.07}
         color="#60a5fa"
         transparent
-        opacity={0.7}
+        opacity={0.65}
         blending={THREE.AdditiveBlending}
       />
     </points>
@@ -124,26 +205,22 @@ function FloatingParticles({ count = 80 }: { count?: number }) {
 
 export function ThreeScene() {
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-60">
+    <div className="w-full h-[450px] md:h-[550px] relative select-none">
       <Canvas style={{ background: "transparent" }}>
-        <PerspectiveCamera makeDefault position={[0, 0, 7]} fov={45} />
+        <PerspectiveCamera makeDefault position={[0, 0, 6.5]} fov={45} />
 
-        {/* Ambient & Directional Lighting */}
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[10, 10, 10]} intensity={2} color="#60a5fa" />
-        <directionalLight position={[-10, -10, -10]} intensity={1} color="#38bdf8" />
-        <pointLight position={[0, 0, 2]} intensity={2} color="#93c5fd" />
+        {/* Studio Lighting matching 3D rendering */}
+        <ambientLight intensity={0.7} />
+        <directionalLight position={[10, 15, 10]} intensity={2.5} color="#93c5fd" />
+        <directionalLight position={[-10, -10, -10]} intensity={1.2} color="#38bdf8" />
+        <pointLight position={[0, 2, 3]} intensity={2} color="#3b82f6" />
 
-        {/* Floating 3D Elements */}
-        <FloatingCore />
-        <FloatingParticles count={100} />
+        {/* Floating 3D Centerpiece & Particles */}
+        <Hero3DCenterpiece />
+        <FloatingParticles count={70} />
 
-        {/* Background Star field */}
-        <Stars radius={40} depth={20} count={2000} factor={3} saturation={0} fade speed={1.2} />
+        <Stars radius={30} depth={15} count={1200} factor={2.5} saturation={0} fade speed={1} />
       </Canvas>
-
-      {/* Smooth gradient transition to page body */}
-      <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-background via-background/60 to-transparent" />
     </div>
   );
 }
